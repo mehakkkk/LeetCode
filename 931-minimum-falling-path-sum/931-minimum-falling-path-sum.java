@@ -1,38 +1,39 @@
 class Solution {
     static int[][] dp;
-    public int solve(int[][] matrix,int row,int col)
-    {
-        if(row<0 || col<0 || row>=matrix.length || col>=matrix.length)
-            return Integer.MAX_VALUE-101;
-        if(row == matrix.length-1)
-            return matrix[row][col];
-        
-        if(dp[row][col] != Integer.MAX_VALUE)
-        {
-            return dp[row][col];
-        }
-        
-        
-        int leftDiag = matrix[row][col] + solve(matrix,row+1,col-1);
-        int rightDiag = matrix[row][col] + solve(matrix,row+1,col+1);
-        int down = matrix[row][col] + solve(matrix,row+1,col);
-        return dp[row][col] = Math.min(down,Math.min(leftDiag,rightDiag));
-    }
     public int minFallingPathSum(int[][] matrix) {
         
         int min = Integer.MAX_VALUE;
-        dp = new int[matrix.length][matrix.length];
+        dp = new int[matrix.length+1][matrix.length+2];
         
         for(int[] row:dp)
         {
-            Arrays.fill(row,Integer.MAX_VALUE);
+            Arrays.fill(row,Integer.MAX_VALUE-101);
         }
+        
+        for(int i=1;i<=matrix.length;i++)
+        {
+            for(int j =1;j<=matrix.length;j++)
+            {
+                if(i == 1 )
+                {
+                    dp[i][j] = matrix[i-1][j-1];
+                }
+                else
+                {
+                    int up = matrix[i-1][j-1] + dp[i-1][j];
+                    int diagRight = matrix[i-1][j-1] + dp[i-1][j+1];
+                    int diagLeft = matrix[i-1][j-1] + dp[i-1][j-1];
+                    dp[i][j] = Math.min(up,Math.min(diagRight,diagLeft));
+                }
+                    
+            }
+        }
+        
+        //all min values will be stored in last row
         for(int i =0;i<matrix.length;i++)
         {
-            min = Math.min(min,solve(matrix,0,i));
+            min = Math.min(min,dp[matrix.length][i+1]);   
         }
-        
         return min;
-        
     }
 }
