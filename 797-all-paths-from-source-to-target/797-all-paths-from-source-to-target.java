@@ -1,6 +1,6 @@
 class Solution {
-    List<List<Integer>>list;
-    public void helper(int[][] graph,int vertex,List<Integer>path)
+    
+    public void helper(int[][] graph,int vertex,List<Integer>path,List<List<Integer>>list)
     {
         if(vertex == graph.length-1)
         {
@@ -12,15 +12,15 @@ class Solution {
         for(int v: graph[vertex])
         {
             path.add(v);
-            helper(graph,v,path);
+            helper(graph,v,path,list);
             path.remove(path.size()-1);
         }
     }
     public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-        list = new ArrayList<>();
+        List<List<Integer>>list = new ArrayList<>();
         List<Integer>path = new ArrayList<>();
         path.add(0);
-        helper(graph,0,path);
+        helper(graph,0,path,list);
         return list;
     }
 }
