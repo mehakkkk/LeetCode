@@ -11,9 +11,9 @@ class Solution {
             return;
         }
         else{
-            //if(open<n)
+            if(open<n)
             helper(n,open++,close,s+"(",list);
-            //if(close<open)
+            if(close<open)
             helper(n,open,close--,s+")",list);
         }
         
