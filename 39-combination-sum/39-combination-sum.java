@@ -1,30 +1,33 @@
 class Solution {
-    List<List<Integer>>res;
-    void helper(int[] num,int target,int l,List<Integer>list)
+    int t;
+    List<List<Integer>>sol;
+    void generateCombination(int[] nums,int sum,int l,List<Integer>ans)
     {
-        if(l == num.length || target<0)
+        if(sum<0)
             return;
         
-        if(target == 0)
+        if(sum!= t && l == nums.length)
+            return;
+        
+        if(sum == 0)
         {
-            res.add(new ArrayList<>(list));
+            sol.add(new ArrayList<>(ans));
             return;
         }
         
-        list.add(num[l]);
-        helper(num,target-num[l],l,list);
-        
-        if(list.size()!=0)
-            list.remove(list.size()-1);
-        
-        helper(num,target,l+1,list);
-        
-        return;
+        for(int i=l;i<nums.length;i++)
+        {
+            ans.add(nums[i]);
+            System.out.println("num:"+nums[i]+" target:"+(sum-nums[i]));
+            generateCombination(nums,sum-nums[i],i,ans);
+            ans.remove(ans.size()-1);
+        }
     }
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        res = new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] nums, int target) {
+        t = target;
         
-        helper(candidates,target,0,new ArrayList<>());
-        return res;
+        sol = new ArrayList<>();
+        generateCombination(nums,t,0,new ArrayList<Integer>());
+        return sol;
     }
 }
