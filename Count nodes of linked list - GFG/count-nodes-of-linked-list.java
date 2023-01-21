@@ -22,19 +22,27 @@ class Node{
 
 class Solution
 {
+ 
     //Function to count nodes of a linked list.
     public static int getCount(Node head)
     {
-        //traverse through linkedlist
-        int count =0;
-        Node curr = head;
-        while(curr!=null)
-        {
-            count++;
-            curr = curr.next;
-        }
-        return count;
-        //Code here
+        //traverse through linkedlist iterative method
+        // int count =0;
+        // Node curr = head;
+        // while(curr!=null)
+        // {
+        //     count++;
+        //     curr = curr.next;
+        // }
+        // return count;
+        
+        //traverse through linkedlist recursive method
+        if(head == null)
+            return 0;
+            
+        return 1+ getCount(head.next);
+        // Node curr = head;
+        // return countNode(curr);
     }
 }
     
