@@ -15,17 +15,13 @@ class Solution{
     public static int countBitsFlip(int a, int b){
         
         // Your code here
-        int mask = a^b;
+        int n = a^b;
         int count = 0;
         
-        while(mask != 0)
+        while(n != 0 )
         {
-            if((mask&1) == 1)
-            {
-                count++;
-               
-            }
-             mask = mask>>1;
+            count++;
+            n= n&(n-1);
         }
         
         return count;
