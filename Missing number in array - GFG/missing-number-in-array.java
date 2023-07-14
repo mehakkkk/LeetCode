@@ -31,14 +31,14 @@ class Solution {
     int missingNumber(int array[], int n) {
         
         //sum of n natural number
-        int sum = (n*(n+1))/2;
-        
-        int arrSum = 0;
-        for(int i:array)
+        int res1 = 0,res2 = n;
+        for(int i =0;i<n-1;i++)
         {
-            arrSum += i;
+            res1 = res1 ^ array[i];
+            
+            res2 = res2 ^ (i+1);
         }
         
-        return sum - arrSum;
+        return res1^res2;
     }
 }
