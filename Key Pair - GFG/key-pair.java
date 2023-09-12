@@ -37,22 +37,19 @@ public class Main {
 
 class Solution {
     boolean hasArrayTwoCandidates(int arr[], int n, int x) {
-        // code here= 0;
-        Arrays.sort(arr);
+        // code here
+        Set<Integer>set = new HashSet<>();
         
-        int left = 0;
-        int right = n-1;
-        
-        while(left<right)
+        for(int i =0;i<arr.length;i++)
         {
-            int sum = arr[left]+arr[right];
-            if(sum == x)
+            int diff = x-arr[i];
+            
+            if(set.contains(arr[i]))
                 return true;
-                
-            if(sum>x)
-                right--;
             else
-                left++;
+            {
+                set.add(diff);
+            }
         }
         
         return false;
