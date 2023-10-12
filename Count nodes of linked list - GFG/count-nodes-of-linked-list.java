@@ -25,15 +25,10 @@ class Solution
     //Function to count nodes of a linked list.
     public static int getCount(Node head)
     {
-        int count = 0;
-        Node curr = head;
-        
-        while(curr != null)
-        {
-            count++;
-            curr = curr.next;
-        }
-        return count;
+        if(head == null)
+            return 0;
+            
+        return 1+getCount(head.next);
     }
 }
     
