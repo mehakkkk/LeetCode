@@ -50,30 +50,28 @@ class Solution{
     
    
     // Function for finding maximum and value pair
-    public static int lenOfLongSubarr (int A[], int N, int k) {
-        //Complete the function
-        Map<Integer,Integer>map = new HashMap<>();
+    public static int lenOfLongSubarr (int A[], int N, int K) {
+        Map<Integer,Integer> map = new HashMap<>();
+        map.put(0,-1);
         
         int sum = 0;
         int res = 0;
-        for(int i=0;i<N;i++)
+        
+        for(int i =0;i<A.length;i++)
         {
             sum += A[i];
             
-            if(sum == k)
+            if(map.containsKey(sum-K))
             {
-                res = Math.max(res,i+1);
+                res = Math.max(res,i-map.get(sum-K));
             }
-            else if(map.containsKey(sum-k))
-            {
-                res = Math.max(res,i-map.get(sum-k));
-            }
-            if(!map.containsKey(sum))
+            
+            if(!map.containsKey(sum)) //only to update sum if not present we require the 
+            //first occurrence to  gemax lengtht
             {
                 map.put(sum,i);
             }
         }
-        
         return res;
     }
     
